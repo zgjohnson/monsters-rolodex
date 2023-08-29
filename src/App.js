@@ -11,20 +11,15 @@ class App extends Component {
       monsters: [],
       search: "",
     };
-    console.log("constructor");
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((users) =>
         this.setState(
           () => {
             return { monsters: users };
-          },
-          () => {
-            console.log(this.state);
           }
         )
       );
@@ -40,7 +35,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("render");
 
     const {monsters, search} = this.state;
     const {onSearchChange} = this;
@@ -59,10 +53,7 @@ class App extends Component {
           onChange= {onSearchChange}
         />
 
-        {filteredMonsters.map((monster) => {
-          return <h1 key={monster.id}>{monster.name}</h1>;
-        })}
-        <CardList />
+        <CardList monsters={filteredMonsters}/>
       </div>
     );
   }
